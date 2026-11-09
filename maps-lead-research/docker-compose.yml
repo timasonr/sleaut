@@ -1,0 +1,15 @@
+services:
+  bot:
+    build: .
+    command: python -m app.bot_app
+    env_file:
+      - .env
+    environment:
+      DATABASE_PATH: /data/app.db
+    volumes:
+      - db-data:/data
+    restart: unless-stopped
+
+  # SQLite lives in the db-data volume (no separate database container).
+volumes:
+  db-data:
